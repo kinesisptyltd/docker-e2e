@@ -44,12 +44,7 @@ RUN apt-get update && apt-get -y install \
       libxml2-dev \
       libxslt1-dev \
       libproj-dev \
-      libsqlite3-dev \
-      libfontconfig1 \
-      libxrender1 \
-      libssl-dev \
-      libffi-dev \
-      binutils
+      libsqlite3-dev
 
 # Download wkhtmltopdf with patched qt
 RUN wget https://downloads.wkhtmltopdf.org/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
@@ -67,13 +62,21 @@ RUN echo 'gem: --no-ri --no-rdoc' > /etc/gemrc && \
 # Install Python
 RUN apt-get install -yq --no-install-recommends \
   python$PYTHON_VERSION \
+  python$PYTHON_VERSION-dev
+
+RUN apt-get install -yq --no-install-recommends \
+  libfontconfig1 \
+  libxrender1 \
   python-pip \
   python3-pip \
+  libssl-dev \
+  libffi-dev \
   python-dev \
   python-psycopg2 \
   python3-psycopg2 \
-  python-gdal \
-  gdal-bin
+  binutils \
+  gdal-bin \
+  python-gdal
 
 # Upgrade pip and install virtualenv
 RUN pip install --upgrade pip && pip install virtualenv
