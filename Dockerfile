@@ -7,8 +7,11 @@ ENV POSTGRES_VERSION 9.6
 ENV RUBY_VERSION 2.3
 ENV PYTHON_VERSION 3.6
 ENV NODE_VERSION 6.10.1
-ENV YARN_VERSION 0.24.6
+ENV YARN_VERSION 0.27.5
 ENV DOCKERIZE_VERSION 0.4.0
+
+RUN apt-get update && apt-get install -y language-pack-en-base
+ENV LANG=en_AU.UTF-8
 
 # Setup additional PPAs
 RUN echo "deb http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu xenial main" > /etc/apt/sources.list.d/brightbox-ruby-ng-xenial.list && \
@@ -76,7 +79,11 @@ RUN apt-get install -yq --no-install-recommends \
   python3-psycopg2 \
   binutils \
   gdal-bin \
-  python-gdal
+  python-gdal \
+  build-essential \
+  libssl-dev \
+  libffi-dev \
+  python3-dev
 
 # Upgrade pip and install virtualenv
 RUN pip install --upgrade pip && pip install virtualenv
