@@ -9,8 +9,9 @@ ENV PYTHON_VERSION 3.6
 ENV NODE_VERSION 6.10.1
 ENV YARN_VERSION 0.27.5
 ENV DOCKERIZE_VERSION 0.4.0
+ENV CHROMEDRIVER_VERSION 2.30
 
-RUN apt-get update && apt-get install -y language-pack-en-base
+RUN apt-get update && apt-get -y install language-pack-en-base 
 ENV LANG=en_AU.UTF-8
 
 # Setup additional PPAs
@@ -47,7 +48,26 @@ RUN apt-get update && apt-get -y install \
       libxml2-dev \
       libxslt1-dev \
       libproj-dev \
-      libsqlite3-dev
+      libsqlite3-dev \
+      xvfb \
+      libxss1 \
+      libgconf2-4 \
+      libappindicator1 \
+      libindicator7 \
+      xdg-utils \
+      unzip
+
+# Download and install chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i --force-depends google-chrome-stable_current_amd64.deb; apt-get install -fy
+
+# Download and install chromedriver
+RUN wget -N http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/
+RUN unzip ~/chromedriver_linux64.zip -d ~/
+RUN rm ~/chromedriver_linux64.zip
+RUN mv -f ~/chromedriver /usr/local/share/
+RUN chmod +x /usr/local/share/chromedriver
+RUN ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 
 # Download wkhtmltopdf with patched qt
 RUN wget https://downloads.wkhtmltopdf.org/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
