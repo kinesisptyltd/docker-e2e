@@ -154,3 +154,7 @@ RUN curl --silent --show-error --fail --location \
 RUN curl -fSL -o dockerize-linux-amd64-v$DOCKERIZE_VERSION.tar.gz https://github.com/jwilder/dockerize/releases/download/v$DOCKERIZE_VERSION/dockerize-linux-amd64-v$DOCKERIZE_VERSION.tar.gz \
       && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v$DOCKERIZE_VERSION.tar.gz \
       && rm dockerize-linux-amd64-v$DOCKERIZE_VERSION.tar.gz
+
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
+    apt-get install -y --no-install-recommends git-lfs && \
+    git lfs install
