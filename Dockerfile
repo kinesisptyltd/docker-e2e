@@ -9,9 +9,9 @@ ENV PYTHON_VERSION 3.6
 ENV NODE_VERSION 6.10.1
 ENV YARN_VERSION 0.27.5
 ENV DOCKERIZE_VERSION 0.4.0
-ENV CHROMEDRIVER_VERSION 2.30
+ENV CHROMEDRIVER_VERSION 2.31
 
-RUN apt-get update && apt-get -y install language-pack-en-base 
+RUN apt-get update && apt-get -y install language-pack-en-base
 ENV LANG=en_AU.UTF-8
 
 # Setup additional PPAs
@@ -49,12 +49,6 @@ RUN apt-get update && apt-get -y install \
       libxslt1-dev \
       libproj-dev \
       libsqlite3-dev \
-      xvfb \
-      libxss1 \
-      libgconf2-4 \
-      libappindicator1 \
-      libindicator7 \
-      xdg-utils \
       unzip
 
 # Download and install chrome
