@@ -1,0 +1,9 @@
+# ~/.tmuxinator/integrated-data.yml
+# you can make as many tabs as you wish...
+
+name: Docker E2E
+windows:
+  - vim: v
+  - terminal:
+  - terminal:
+  - terminal:
